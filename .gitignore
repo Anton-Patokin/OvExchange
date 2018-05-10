@@ -40,3 +40,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+enviroment.ts
+/api/node_modules
+/api/enviroment.js
