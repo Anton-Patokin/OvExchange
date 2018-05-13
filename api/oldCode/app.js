@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express();
-const binance = require('./node-binance-api.js');
+const binance = require('../src/binance/node-binance-api.js');
 const config = require('./enviroment.js');
 const mongoose = require('mongoose');
 // const scanResource = require('./mongoDb/binance_balances.js');
@@ -42,7 +42,7 @@ app.get('/getBalance/:getApi', (request, response) => {
       'APISECRET':config.env.binance_secret
     });
 
-app.use('/save', balanceRouter);
+    app.use('/save', balanceRouter);
 
 
 

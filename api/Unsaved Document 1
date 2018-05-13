@@ -1,0 +1,8 @@
+#set up backend
+https://blog.sourcerer.io/a-crash-course-on-typescript-with-node-js-2c376285afe1
+
+
+
+npm install -g ts-node
+##install mongo
+

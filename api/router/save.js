@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const Balance = require('../mongoDb/balance.js')
+const Balance = require('../src/mongoDb/balance.js')
 
 router.post('/:date/:totalBalance', (req, res, next) => {
   console.log("post save binance")

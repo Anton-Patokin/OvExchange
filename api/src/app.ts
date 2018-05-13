@@ -2,6 +2,8 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import { Request, Response } from "express";
 import binance from "./binance/Controller"
+import cron from "./croneJobs/Controller"
+
 
 class App {
 
@@ -9,6 +11,7 @@ class App {
     this.app = express();
     this.config();
     this.routes();
+    cron.init()
   }
 
   public app: express.Application;
@@ -24,11 +27,8 @@ class App {
     const router = express.Router();
 
     router.get('/', (req: Request, res: Response) => {
-      res.status(200).send({
-        message: 'Hello World!123'
-      })
+      res.status(200).send(`<a href="/">/</a><br><a href="/binance/balance">/binance/balance</a>`)
     });
-
 
 
     router.post('/', (req: Request, res: Response) => {
