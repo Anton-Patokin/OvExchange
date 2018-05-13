@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ExchangeHttpDataService} from "./exchange-http-data.service";
 
 @Component({
@@ -8,45 +8,60 @@ import {ExchangeHttpDataService} from "./exchange-http-data.service";
 })
 export class AppComponent {
 
-  public binanceExchangeBalances = [];
-  public currency = [];
-  public totalbincoins= 0;
-  constructor(private exchangeHttpDataService:ExchangeHttpDataService){
+  public balancesInfo = [];
+  public totalBalance = 0;
+  private oneHoureInterval: number = 3600000;
+
+  constructor(private exchangeHttpDataService: ExchangeHttpDataService) {
 
   }
 
   ngOnInit() {
-    this.exchangeHttpDataService.getBinanceBalance().subscribe((data)=>{
-      this.binanceExchangeBalances = data;
-
-      this.exchangeHttpDataService.getCurrentPrices(this.binanceExchangeBalances).subscribe((currency)=>{
-        this.currency = currency;
-      })
-    })
+    this.getBinanceInfo()
+    setInterval(() => {
+      this.getBinanceInfo()
+    }, 10000);
 
   }
-
-  public getSimbols(){
+//test
+  public getSimbols() {
     return this.exchangeHttpDataService.getSimbols();
   }
 
-  public ifIndexExist(x,y){
-    if(this.currency[x] && this.currency[x][y]){
-      return this.currency[x][y];
-    }else {
-      return "y"
-    }
-  }
+  private getBinanceInfo() {
 
-  public totalAmountOfCoins(x,y){
-    return Number(x) + Number(y);
-  }
+    this.exchangeHttpDataService.getBinanceBalance().subscribe((balances) => {
+      this.exchangeHttpDataService.getCurrentPrices(balances).subscribe((currency) => {
+        this.balancesInfo = [];
+        this.totalBalance = 0;
+        balances = balances.map((balance, index) => {
+          return [balances[index], currency[index]]
+        })
 
-  public totalMoney(totalAmount, x){
-    if(this.currency.length != 0 && totalAmount && this.currency[x][0]){
-      this.totalbincoins += Number(totalAmount) * Number(this.currency[x][0]);
-      return Number(totalAmount) * Number(this.currency[x][0]);
-    }
+        balances.forEach((balance, index) => {
+          const totalCoins = Number(balance[0].available) + Number(balance[0].onOrder);
+          const priceBTC = balance[1][0];
+          this.balancesInfo.push({
+            name: balance[0].name,
+            available: balance[0].available,
+            onOrder: balance[0].onOrder,
+            total: totalCoins,
+            BTC: priceBTC,
+            ETH: balance[1][1],
+            BNB: balance[1][2],
+            USDT: balance[1][3],
+            totalPrice: totalCoins * Number(priceBTC)
+          })
+        })
+
+        this.totalBalance = this.balancesInfo.reduce((total, balance) => {
+          return total + balance.totalPrice;
+        }, 0)
+
+        console.log(this.balancesInfo, this.totalBalance)
+        this.exchangeHttpDataService.saveTotalBalance(this.totalBalance)
+      })
+    })
   }
 
 }

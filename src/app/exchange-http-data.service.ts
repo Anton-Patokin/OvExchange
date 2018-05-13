@@ -15,7 +15,7 @@ export class ExchangeHttpDataService {
 
 
   public getBinanceBalance() {
-    return this.http.get<any>("http://localhost:5000/balances").map((balances) => {
+    return this.http.get<any>("http://localhost:5000/getBalance/balances").map((balances) => {
       let array = []
       for (var x in balances) {
         var value = Number(balances[x].available) > 0;
@@ -28,7 +28,7 @@ export class ExchangeHttpDataService {
   }
 
   public getCurrentPrices(balances) {
-    return this.http.get<any>("http://localhost:5000/currentPrice").map((currentPrices) => {
+    return this.http.get<any>("http://localhost:5000/getBalance/currentPrice").map((currentPrices) => {
       console.log(currentPrices)
       let array = []
 
@@ -58,5 +58,16 @@ export class ExchangeHttpDataService {
     return this.symbols;
   }
 
+
+  public saveTotalBalance(totalBalance) {
+    this.http.post('http://localhost:5000/save/' + Date.now() + '/' + totalBalance, {
+      date: Date.now(),
+      totalBalance: totalBalance
+    })
+      .subscribe(()=>{
+      console.log("---------------------------")
+        }
+      );
+  }
 
 }
