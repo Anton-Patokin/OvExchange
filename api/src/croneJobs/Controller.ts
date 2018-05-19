@@ -2,7 +2,7 @@ import taskShedular from "./TaskScheduler"
 
 class Controller{
   public init(){
-    taskShedular.everyMinut(function () {
+    taskShedular.everySecond(function () {
       console.log("run evry minut");
     })
   }
