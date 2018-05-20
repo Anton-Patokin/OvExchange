@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Rx'
 import "rxjs/add/operator/filter"
 import "rxjs/add/operator/map"
+import index from "@angular/cli/lib/cli";
 
 @Injectable()
 export class ExchangeHttpDataService {
@@ -15,59 +16,16 @@ export class ExchangeHttpDataService {
 
 
   public getBinanceBalance() {
-    return this.http.get<any>("http://localhost:5000/getBalance/balances").map((balances) => {
-      let array = []
-      for (var x in balances) {
-        var value = Number(balances[x].available) > 0;
-        if (value) {
-          array.push({name: x, available: balances[x].available, onOrder: balances[x].onOrder})
+    return this.http.get<any>("http://localhost:5000/binance/getColection").map((data) => {
+      // return balances[0][Object.keys(balances[0][0])];
+      return data[0];
+    }).map((balance)=>{
+      return Object.keys(balance).map(function(key) {
+        if(balance[key].name){
+          return balance[key]
         }
-      }
-      return array;
+      });
+      ;
     });
   }
-
-  public getCurrentPrices(balances) {
-    return this.http.get<any>("http://localhost:5000/getBalance/currentPrice").map((currentPrices) => {
-      console.log(currentPrices)
-      let array = []
-
-      for (var x in balances) {
-        let simbolsArray = [];
-        for (var simbol of this.symbols) {
-          if (currentPrices[balances[x].name + simbol]) {
-            simbolsArray.push(currentPrices[balances[x].name + simbol])
-          } else if (currentPrices[simbol + balances[x].name]) {
-            simbolsArray.push(currentPrices[simbol + balances[x].name])
-          }else {
-            if(balances[x].name == simbol){
-              simbolsArray.push("1")
-            }else{
-              simbolsArray.push("/")
-            }
-          }
-        }
-        array.push(simbolsArray)
-      }
-      return array;
-    });
-  }
-
-
-  public getSimbols(){
-    return this.symbols;
-  }
-
-
-  public saveTotalBalance(totalBalance) {
-    this.http.post('http://localhost:5000/save/' + Date.now() + '/' + totalBalance, {
-      date: Date.now(),
-      totalBalance: totalBalance
-    })
-      .subscribe(()=>{
-      console.log("---------------------------")
-        }
-      );
-  }
-
 }

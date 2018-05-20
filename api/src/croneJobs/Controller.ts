@@ -1,9 +1,12 @@
-import taskShedular from "./TaskScheduler"
+import taskShedular from './TaskScheduler'
+import binanceService from  './../binance/Service'
 
 class Controller{
   public init(){
-    taskShedular.everySecond(function () {
-      console.log("run evry minut");
+    taskShedular.evryMinut(function () {
+      binanceService.saveBalanceWithCurrentPrice().then((data)=>{
+        console.log("saved to the database");
+      })
     })
   }
 }

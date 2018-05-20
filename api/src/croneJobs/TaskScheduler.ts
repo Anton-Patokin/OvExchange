@@ -7,8 +7,8 @@ class TaskScheduler{
       fun()
     });
   }
-  public everyMinut(fun){
-    cron.schedule('* * * * * *', function(){
+  public evryMinut(fun){
+    cron.schedule('1 * * * * *', function(){
       fun()
     });
   }
