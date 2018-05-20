@@ -1,33 +1,33 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
-  <table>
+  <table *ngIf="binanceBalances">
     <tr>
-      <th>name</th>
-      <th>available</th>
-      <th>onOrder</th>
-      <th>total</th>
-      <th *ngFor="let simbol of getSimbols()">{{simbol}}</th>
-      <th>$$$</th>
+      <th  *ngFor="let balance of binanceBalances">{{balance}}</th>
     </tr>
-    <tr *ngFor="let binanceExchangeBalance of binanceExchangeBalances; let x = index">
-      <td>{{binanceExchangeBalance.name}}</td>
-      <td>{{binanceExchangeBalance.available}}</td>
-      <td>{{binanceExchangeBalance.onOrder}}</td>
-      <td>{{totalAmountOfCoins(binanceExchangeBalance.available, binanceExchangeBalance.onOrder)}}</td>
-      <td *ngFor="let simbol of getSimbols(); let y = index">{{ifIndexExist(x,y)}}</td>
-      <td>{{totalMoney(totalAmountOfCoins(binanceExchangeBalance.available, binanceExchangeBalance.onOrder),x )}}</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>{{totalbincoins}}</td>
-    </tr>
+
+    <!--<tr *ngFor="let balance of binanceBalances">-->
+      <!--<td>{{ balance.name }}</td>-->
+      <!--<td>{{ balance.available }}</td>-->
+      <!--<td>{{ balance.onOrder }}</td>-->
+      <!--<td>{{ balance.total }}</td>-->
+      <!--<td>{{ balance.BTC }}</td>-->
+      <!--<td>{{ balance.ETH }}</td>-->
+      <!--<td>{{ balance.BNB }}</td>-->
+      <!--<td>{{ balance.USDT }}</td>-->
+      <!--<td>{{ balance.totalPrice }}</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td></td>-->
+      <!--<td>{{ totalBalance }}</td>-->
+    <!--</tr>-->
   </table>
 
 </div>
