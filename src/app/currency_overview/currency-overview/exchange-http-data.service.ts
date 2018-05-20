@@ -11,21 +11,14 @@ export class ExchangeHttpDataService {
 
   symbols = ['BTC', 'ETH', 'BNB', 'USDT'];
 
+
   constructor(private http: HttpClient) {
   }
-
-
   public getBinanceBalance() {
-    return this.http.get<any>("http://localhost:5000/binance/getColection").map((data) => {
-      // return balances[0][Object.keys(balances[0][0])];
-      return data[0];
-    }).map((balance)=>{
-      return Object.keys(balance).map(function(key) {
-        if(balance[key].name){
-          return balance[key]
-        }
-      });
-      ;
-    });
+    return this.http.get<any>("http://localhost:5000/binance/getColection").map((arr) => {
+      return Object.keys(arr[0]).map(k => arr[0][k]);
+    })
   }
+
 }
+

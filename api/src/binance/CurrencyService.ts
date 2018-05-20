@@ -1,10 +1,8 @@
-import {reject} from "q";
-
 const binance = require('./node-binance-api.js');
 import env from "../enviroment"
 import {Balance} from "../mongoDb/balance";
 
-class Service {
+class CurrencyService {
 
   constructor() {
     binance.options({
@@ -102,4 +100,4 @@ class Service {
 
 }
 
-export default new Service();
+export default new CurrencyService();

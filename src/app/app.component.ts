@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExchangeHttpDataService} from "./exchange-http-data.service";
+import {ExchangeHttpDataService} from "./currency_overview/currency-overview/exchange-http-data.service";
 
 @Component({
   selector: 'app-root',
@@ -10,19 +10,12 @@ export class AppComponent {
 
   public binanceBalances;
 
-  constructor(private exchangeHttpDataService: ExchangeHttpDataService) {
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.getBinanceBalances();
   }
 
-  public getBinanceBalances(){
-     this.exchangeHttpDataService.getBinanceBalance().subscribe((data)=>{
-       this.binanceBalances = data;
-       console.log(this.binanceBalances[0])
 
-     })
-  }
 }

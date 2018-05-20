@@ -13,6 +13,7 @@ import {
   MatSidenavModule, MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
+  MatTableModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -33,8 +34,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatInputModule,
     MatTooltipModule,
     MatDialogModule,
-    BrowserAnimationsModule
-    ,
+    BrowserAnimationsModule,
     MatListModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
@@ -43,6 +43,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatSliderModule,
     MatListModule,
     MatSnackBarModule,
+    MatTableModule,
   ],
   exports: [
     MatButtonModule,
@@ -65,7 +66,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatSlideToggleModule,
     MatListModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTableModule,
   ],
   declarations: [
     HoverClassDirective

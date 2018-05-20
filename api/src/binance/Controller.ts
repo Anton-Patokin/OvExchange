@@ -1,6 +1,6 @@
 import * as express from "express";
 import {Request, Response} from "express";
-import service from "./Service"
+import CurrencyService from "./CurrencyService"
 
 const binance = require('./node-binance-api.js');
 import env from "../enviroment"
@@ -22,7 +22,7 @@ class Controller {
 
   public routes() {
      this.router.get('/getColection', (req: Request, res: Response) => {
-        service.getBalanceWithCurencyFromDB().then((data)=>{
+       CurrencyService.getBalanceWithCurencyFromDB().then((data)=>{
           console.log("-----getColection-------")
           res.json(data);
         })

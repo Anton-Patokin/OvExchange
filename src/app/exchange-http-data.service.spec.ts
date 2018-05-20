@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ExchangeHttpDataService } from './exchange-http-data.service';
+import { ExchangeHttpDataService } from './currency_overview/currency-overview/exchange-http-data.service';
 
 describe('ExchangeHttpDataService', () => {
   beforeEach(() => {
