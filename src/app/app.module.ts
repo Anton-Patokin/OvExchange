@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MaterialModule} from "./material/material-module";
 
 
 import { AppComponent } from './app.component';
 import {ExchangeHttpDataService} from "./exchange-http-data.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     ExchangeHttpDataService
