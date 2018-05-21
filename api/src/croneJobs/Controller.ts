@@ -1,5 +1,5 @@
 import taskShedular from './TaskScheduler'
-import binanceService from  './../binance/Service'
+import binanceService from '../binance/CurrencyService'
 
 class Controller{
   public init(){

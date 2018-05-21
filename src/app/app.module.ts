@@ -1,19 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {MaterialModule} from "./material/material-module";
 
 
 import { AppComponent } from './app.component';
-import {ExchangeHttpDataService} from "./exchange-http-data.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {ExchangeHttpDataService} from "./currency_overview/currency-overview/exchange-http-data.service";
+import {HttpClientModule} from "@angular/common/http";
+import { CurrencyOverviewComponent } from './currency_overview/currency-overview/currency-overview.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CurrencyOverviewComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [
     ExchangeHttpDataService

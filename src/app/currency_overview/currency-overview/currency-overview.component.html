@@ -1,0 +1,48 @@
+<div class="example-container mat-elevation-z8" *ngIf="binanceBalances.length > 0">
+  <table>
+    <tr>
+      <th>No. </th>
+      <th>Currency</th>
+      <th>Avaible</th>
+      <th>On order</th>
+      <th>Total coins</th>
+      <th mat-button [matMenuTriggerFor]="menu">price ({{selectedSmbol}})</th>
+      <th>Cost</th>
+    </tr>
+    <tr *ngFor="let balance of binanceBalances; let i = index">
+      <td>{{i}}</td>
+      <td>{{balance.name}}</td>
+      <td>{{balance.available | number:'2.6-6'}}</td>
+      <td>{{balance.onOrder | number:'2.6-6'}}</td>
+      <td>{{balance.totalCoins | number:'2.6-6'}}</td>
+      <td>{{balance.symbols[selectedSmbol] | number:'2.6-6'}}</td>
+      <td>{{balance.symbols[selectedSmbol] * balance.totalCoins | number:'2.6-6'}}</td>
+    </tr>
+    <tr>
+      <td colspan="6"></td>
+      <td>{{sumOfAllCoins | number:'2.6-6'}}</td>
+    </tr>
+  </table>
+
+</div>
+<!---->
+
+<!--<div class="example-container mat-elevation-z8" *ngIf="binanceBalances.length > 0">-->
+  <!--<div class="flex-row">-->
+    <!--<h3 class="flex-col-sm-2">Currency</h3>-->
+    <!--<h3 class="flex-col-sm-2">Available</h3>-->
+    <!--<h3 class="flex-col-sm-2">On order</h3>-->
+    <!--<h3 class="flex-col-sm-2">Total coins</h3>-->
+    <!--<h3 class="flex-col-sm-2" mat-button [matMenuTriggerFor]="menu">Price ({{selectedSmbol}})</h3>-->
+  <!--</div>-->
+  <!--<div class="flex-row" *ngFor="let balance of binanceBalances">-->
+    <!--<td>{{balance.name}}</div>-->
+    <!--<td>{{balance.available}}</div>-->
+    <!--<td>{{balance.onOrder}}</div>-->
+    <!--<td>{{balance.total}}</div>-->
+    <!--<td>{{balance.symbols[selectedSmbol]}}</div>-->
+  <!--</div>-->
+<!--</div>-->
+<mat-menu #menu="matMenu">
+  <button *ngFor="let symbol of symbols" mat-menu-item (click)="selectSymbol(symbol)">{{symbol}}</button>
+</mat-menu>
