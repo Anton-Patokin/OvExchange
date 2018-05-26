@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExchangeHttpDataService} from "./currency_overview/currency-overview/exchange-http-data.service";
+import {ExchangeHttpDataService} from "./currency_overview/exchange-http-data.service";
 
 @Component({
   selector: 'app-root',

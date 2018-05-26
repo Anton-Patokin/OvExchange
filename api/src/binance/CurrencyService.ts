@@ -53,7 +53,6 @@ class CurrencyService {
                     simbolsArray.push("/")
                   }
                 }
-                console.log(simbolsArray)
               }
               array.push({
                 name: binanceCoinIndex,
@@ -74,7 +73,7 @@ class CurrencyService {
     return new Promise((resolve, reject)=>{
       this.apiBalanceWithCurrentPrice().then((data) => {
         this.removeBinanceColection();
-        let binaceDb = new Balance(data);
+        let binaceDb = new Balance({balance:data});
         binaceDb.save().then(item => {
          resolve("item saved to database");
         }).catch(err => {
@@ -92,7 +91,7 @@ class CurrencyService {
 
   public getBalanceWithCurencyFromDB():Promise<any>{
     return new Promise((resolve, rejact)=>{
-      Balance.find().then((data)=>{
+      Balance.find({},{balance:1}).then((data)=>{
         resolve(data)
       })
     })

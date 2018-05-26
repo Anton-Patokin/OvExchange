@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ExchangeHttpDataService} from "./exchange-http-data.service";
+import {ExchangeHttpDataService} from "../exchange-http-data.service";
 
 @Component({
   selector: 'app-currency-overview',
@@ -12,6 +12,7 @@ export class CurrencyOverviewComponent implements OnInit {
   public symbols = ['BTC', 'ETH', 'BNB', 'USDT'];
   selectedSmbol = 'BTC';
   public sumOfAllCoins = 0;
+
 
   constructor(private exchangeHttpDataService: ExchangeHttpDataService) {
   }
@@ -27,9 +28,9 @@ export class CurrencyOverviewComponent implements OnInit {
   public getBinanceBalances() {
     this.exchangeHttpDataService.getBinanceBalance().subscribe((data) => {
       this.binanceBalances = data;
-      this.calculateSumOfAllCoins();
-      console.log(this.binanceBalances)
+      // this.calculateSumOfAllCoins();
     })
+
   }
 
   public calculateSumOfAllCoins(){
