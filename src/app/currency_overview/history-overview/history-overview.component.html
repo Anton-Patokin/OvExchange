@@ -1,0 +1,27 @@
+<div class="example-container mat-elevation-z8" *ngIf="coinsHistory.length > 0">
+  <div mat-button [matMenuTriggerFor]="menu">coin({{coin.simbol}})</div>
+  <table>
+    <tr>
+      <th>No. </th>
+      <th>orderId. </th>
+      <th>Buy or Sell</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+    <tr *ngFor="let trades of coin.trades; let i = index">
+      <td>{{i}}</td>
+      <td>{{trades.orderId}}</td>
+      <td>{{trades.isBuyer?"BUY":"SELL"}}</td>
+      <td>{{trades.qty | number:'2.6-6'}}</td>
+      <td>{{trades.price | number:'2.6-6'}}</td>
+      <td>{{trades.price * trades.qty | number:'2.6-6'}}</td>
+    </tr>
+
+  </table>
+  <mat-menu #menu="matMenu">
+    <button *ngFor="let overview of coinsHistory; let i = index" mat-menu-item (click)="selectHistory(i)">{{overview.simbol}}</button>
+  </mat-menu>
+</div>
+<!---->
+<!---->
